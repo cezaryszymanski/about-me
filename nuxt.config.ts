@@ -3,8 +3,8 @@ export default defineNuxtConfig({
   css: [
     '@/assets/scss/main.scss'
   ],
-  router: {
-    base: '/about-me/',
+  app: {
+    baseURL: '/about-me/',
   }
 })
 
