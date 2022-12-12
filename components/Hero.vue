@@ -11,7 +11,9 @@
     </span>
     <div class="hero__dots">
       <div v-for="dot in dots" :key="dot" class="hero__dot" :class="`hero__dot--${dot}`" />
-    
+    </div>
+    <div class="hero__dots">
+      <div v-for="dot in [...dots].reverse()" :key="dot" class="hero__dot" :class="`hero__dot--${dot}`" />
     </div>
   </div>
 </template>
@@ -36,7 +38,15 @@ export default defineComponent({
 
         const sign = dot % 2 === 0 ? 1 : -1
 
-        gsap.to(`.hero__dot--${dot}`, {y: sign * screenHeight.value / 4 , duration: 1, opacity: 0, repeat: -1, yoyo: true, delay: dot / 30  })
+        gsap.to(`.hero__dot--${dot}`, {
+          y: sign  * screenHeight.value / 4, 
+          duration: 1.5, 
+          opacity: 0.6, 
+          repeat: -1, 
+          scaleY: 5,
+          yoyo: true, 
+          delay: (3 * dot) / 50  
+        })
       })
     })
 
@@ -52,7 +62,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .hero {
-  height: 80vh;
+  height: 90vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -60,7 +70,7 @@ export default defineComponent({
   justify-content: center;
   font-size: 1.5rem;
   line-height: 1.2;
-  overflow-x: hidden;
+  overflow: hidden;
   &__name {
     font-weight: 600;
     font-size: 2em;
@@ -82,13 +92,13 @@ export default defineComponent({
   &__dots {
     display: flex;
     margin-top: 0.2rem;
+     z-index: -1;
   }
   &__dot {
    height: 10px;
-   width: 10px;
-   background: var(--primary);
-   margin-right: 2px;
-   border-radius: 50%;
+   width: 12px;
+   background: #1572A1;
+   opacity: 0;
   }
 }
 
